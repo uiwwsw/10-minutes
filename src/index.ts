@@ -3,6 +3,7 @@ import "phaser";
 // import logoImg from "./assets/logo.png";
 
 export default class Demo extends Phaser.Scene {
+  kbd: Phaser.Types.Input.Keyboard.CursorKeys;
   constructor(config: any) {
     super(config);
   }
@@ -28,6 +29,12 @@ export default class Demo extends Phaser.Scene {
       yoyo: true,
       repeat: -1,
     });
+    this.kbd = this.input.keyboard.createCursorKeys();
+  }
+  update() {
+    if (this.kbd.up.isDown) {
+      console.log("dawkldja");
+    }
   }
 }
 

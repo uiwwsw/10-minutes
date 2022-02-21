@@ -1,6 +1,9 @@
 @import "./reset.css";
+:root {
+  --background: #125555;
+}
 body {
-  background: #000;
+  background: var(--background);
 }
 canvas {
   position: fixed;

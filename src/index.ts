@@ -3,6 +3,7 @@ import "phaser";
 // import logoImg from "./assets/logo.png";
 
 export default class Demo extends Phaser.Scene {
+  logo: any;
   kbd: Phaser.Types.Input.Keyboard.CursorKeys;
   constructor(config: any) {
     super(config);
@@ -19,25 +20,38 @@ export default class Demo extends Phaser.Scene {
 
     // this.add.image(400, 300, "libs");
 
-    const logo = this.add.image(400, 70, "logo");
+    this.logo = this.add.image(400, 70, "logo");
 
-    this.tweens.add({
-      targets: logo,
-      y: 350,
-      duration: 1500,
-      ease: "Sine.inOut",
-      yoyo: true,
-      repeat: -1,
-    });
+    // this.tweens.add({
+    //   targets: this.logo,
+    //   y: 350,
+    //   duration: 1500,
+    //   ease: "Sine.inOut",
+    //   yoyo: true,
+    //   repeat: -1,
+    // });
     this.kbd = this.input.keyboard.createCursorKeys();
   }
   update() {
     if (this.kbd.up.isDown) {
-      console.log("dawkldja");
+      this.logo.y -= 1;
+    }
+    if (this.kbd.down.isDown) {
+      this.logo.y += 1;
+    }
+    if (this.kbd.left.isDown) {
+      this.logo.x -= 1;
+    }
+    if (this.kbd.right.isDown) {
+      this.logo.x += 1;
     }
   }
 }
-
+console.log(
+  getComputedStyle(document.querySelector(":root")).getPropertyValue(
+    "--background"
+  )
+);
 const config = {
   type: Phaser.AUTO,
   backgroundColor: "#125555",

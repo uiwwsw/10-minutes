@@ -1,6 +1,6 @@
 import "./style.scss";
 import "phaser";
-// import logoImg from "./assets/logo.png";
+import Kakao from "./assets/image/ddd.jpeg";
 class FPSScene extends Phaser.Scene {
   private text: Phaser.GameObjects.Text | null = null;
 
@@ -29,12 +29,15 @@ class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image("character", "/assets/image/character.png");
+    this.load.image("character", Kakao);
   }
 
   create(): void {
+    // this.matter.world.setBounds();
+    // this.character2 = this.add.image(100, 150, "character");
     this.character = this.add.image(100, 150, "character");
-    // 사용할 키를 추가해줍니다.
+    this.character.setScale(0.2);
+
     this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.downKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.DOWN

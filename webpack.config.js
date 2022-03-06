@@ -53,7 +53,7 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: [".js", ".ts"],
+    extensions: [".js", ".ts", ".jpeg", ".css"],
   },
   output: {
     path: path.resolve(__dirname, "./dist"),

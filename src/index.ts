@@ -36,38 +36,37 @@ class MainScene extends Phaser.Scene {
     this.load.image("character2", Kakao2);
   }
 
-  create(): void {
-    // this.matter.world.setBounds();
-    // this.character2 = this.add.image(100, 150, "character");
+  makeMe() {
     this.character = this.matter.add.image(100, 150, "character");
-    const a = this.matter.add.image(300, 150, "character1");
-    const b = this.matter.add.image(500, 150, "character2");
-    a.setScale(0.2);
-    b.setScale(0.2);
-    this.matter.world.setBounds(0, 0, 800, 600);
+    this.character.setCircle(50);
+  }
 
-    this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-    this.downKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.DOWN
-    );
-    this.leftKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.LEFT
-    );
-    this.rightKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.RIGHT
-    );
+  makeMonster() {
+    // const a = this.matter.add.image(300, 150, "character1");
+    // const b = this.matter.add.image(500, 150, "character2");
+    // a.setScale(0.2);
+    // b.setScale(0.2);
+  }
 
-    this.matter.world.on("collisionstart", function (event) {
+  onCollisionstart() {
+    this.matter.world.on("collisionstart", (event) => {
       //  Loop through all of the collision pairs
-      var pairs = event.pairs;
+      const pairs = event.pairs;
 
       for (var i = 0; i < pairs.length; i++) {
+        const bodyA = pairs[i].bodyA.gameObject;
+        const bodyB = pairs[i].bodyB.gameObject;
+        if (bodyA === this.character) {
+          console.log("1");
+        } else {
+          console.log("2");
+        }
         // var bodyA = pairs[i].bodyA;
         // var bodyB = pairs[i].bodyB;
-        console.log(
-          pairs[i].bodyA.gameObject === a,
-          pairs[i].bodyB.gameObject === a
-        );
+        // console.log(
+        //   pairs[i].bodyA.gameObject === a,
+        //   pairs[i].bodyB.gameObject === a
+        // );
         //  We only want sensor collisions
         // if (pairs[i].isSensor) {
         //   var blockBody;
@@ -101,6 +100,26 @@ class MainScene extends Phaser.Scene {
         // }
       }
     });
+  }
+
+  create(): void {
+    // this.matter.world.setBounds();
+    // this.character2 = this.add.image(100, 150, "character");
+    this.makeMe();
+    this.onCollisionstart();
+
+    this.matter.world.setBounds(0, 0, 800, 600);
+
+    this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+    this.downKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.DOWN
+    );
+    this.leftKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.LEFT
+    );
+    this.rightKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.RIGHT
+    );
   }
 
   update(): void {
